@@ -66,7 +66,7 @@ const SigninPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-150"
+            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-150 cursor-pointer"
           >
             Sign In
           </button>
@@ -83,7 +83,7 @@ const SigninPage = () => {
 
         <button
           onClick={() => signIn("google")}
-          className="w-full px-4 py-2 border flex items-center justify-center gap-2 border-slate-200 rounded-lg text-slate-700  hover:border-slate-400 hover:shadow transition duration-150"
+          className="w-full px-4 py-2 border flex items-center justify-center gap-2 border-slate-200 rounded-lg text-slate-700  hover:border-slate-400 hover:shadow transition duration-150 cursor-pointer"
         >
           <Image
             width={24}
