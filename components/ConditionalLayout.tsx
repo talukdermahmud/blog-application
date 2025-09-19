@@ -15,7 +15,7 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex items-center justify-center min-h-screen">
         <LoadingSpinner />
       </div>
-    ); // Display a loading spinner
+    );
   }
 
   return noLayoutRoutes.includes(pathname) ? (

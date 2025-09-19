@@ -22,7 +22,6 @@ export default function Card({ title, body, id, index }: CardProps) {
       <h3 className="text-lg font-semibold text-[var(--foreground)] mb-3">
         {formatTitleToCapital(title)}
       </h3>
-      {/* <span> {userId}</span> */}
       <p className="text-[var(--foreground)] opacity-80 text-md mb-4 line-clamp-3">
         {body}
       </p>

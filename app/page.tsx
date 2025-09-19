@@ -10,27 +10,22 @@ export default function RootPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  // Handle authentication redirects
   useEffect(() => {
-    // If still loading, don't redirect yet
     if (status === "loading") {
       return;
     }
 
-    // If user is signed in, redirect to dashboard
     if (status === "authenticated") {
       router.push("/dashboard");
       return;
     }
 
-    // If user is not signed in, redirect to signin
     if (status === "unauthenticated") {
       router.push("/signin");
       return;
     }
   }, [status, session, router]);
 
-  // Show loading state while checking authentication
   if (status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
@@ -48,7 +43,6 @@ export default function RootPage() {
     );
   }
 
-  // Fallback while redirecting (shouldn't be seen in production)
   return (
     <div className="min-h-screen flex items-center justify-center">
       <motion.div

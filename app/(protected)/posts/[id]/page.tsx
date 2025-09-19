@@ -6,7 +6,5 @@ export default function PostDetailsPage({
 }: {
   params: { id: number };
 }) {
-  console.log(params, "page");
-
   return <PostDetails params={params} />;
 }

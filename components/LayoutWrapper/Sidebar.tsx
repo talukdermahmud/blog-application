@@ -32,7 +32,6 @@ export default function Sidebar({
       initial={false}
       animate={false}
     >
-      {/* Sidebar Header */}
       <div className="p-4 h-16 border-b border-[var(--secondary)] shadow-sm flex items-center justify-between">
         {isOpen && (
           <motion.span
@@ -54,7 +53,6 @@ export default function Sidebar({
         </motion.button>
       </div>
 
-      {/* Navigation Items */}
       <nav className="flex-1 overflow-y-auto h-full">
         <motion.ul className="py-2" initial={false} animate={false}>
           {navItems.map((item, index) => {

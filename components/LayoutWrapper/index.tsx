@@ -15,21 +15,17 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   useSession();
 
-  // Sidebar navigation items based on authentication status
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: <LayoutDashboard /> },
     { name: "Posts", href: "/posts", icon: <NotebookPen /> },
     { name: "Users", href: "/users", icon: <Users /> },
-    // ...(session ? [{ name: "Profile", href: "/profile", icon: <User /> }] : []),
   ];
 
-  // Dynamic margin-left for main content and topbar based on sidebar state
   const mainMarginLeft = isSidebarOpen ? "300px" : "60px";
   const topbarMarginLeft = isSidebarOpen ? "300px" : "60px";
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar - Fixed on the left */}
       <motion.div
         className="fixed top-0 left-0 h-full z-40"
         animate={{ width: isSidebarOpen ? 300 : 60 }}
@@ -43,15 +39,12 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
         />
       </motion.div>
 
-      {/* Main layout with Topbar and Content */}
       <div
         className="flex flex-col flex-1"
         style={{ marginLeft: mainMarginLeft }}
       >
-        {/* Topbar - Fixed at the top of the main content */}
         <Topbar topbarMarginLeft={topbarMarginLeft} />
 
-        {/* Main Content Area */}
         <motion.main
           className="flex-1"
           style={{ marginTop: "4rem" }}
@@ -63,7 +56,6 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
         </motion.main>
       </div>
 
-      {/* Overlay for mobile sidebar toggle */}
       {isSidebarOpen && (
         <motion.div
           className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
