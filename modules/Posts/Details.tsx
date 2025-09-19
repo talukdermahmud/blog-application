@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 import { formatTitleToCapital } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { MoveLeft } from "lucide-react";
-import { use } from "react";
 
 function useFetch<T>(
   fetchFn: () => Promise<T>,
@@ -56,10 +55,10 @@ function useFetch<T>(
 export default function PostDetails({
   params,
 }: {
-  params: Promise<{ id: number }>;
+  params: { id: number };
 }) {
   const router = useRouter();
-  const { id } = use(params);
+  const { id } = params;
 
   const {
     data: post,

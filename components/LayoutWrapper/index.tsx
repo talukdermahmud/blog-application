@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Sidebar from "@/components/LayoutWrapper/Sidebar";
 import Topbar from "@/components/LayoutWrapper/Topbar";
 import { useSession, signOut } from "next-auth/react";
-import { LayoutDashboard, NotebookPen, User, Users } from "lucide-react";
+import { LayoutDashboard, NotebookPen, Users } from "lucide-react";
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ interface LayoutWrapperProps {
 
 export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const { data: session } = useSession();
+  useSession();
 
   // Sidebar navigation items based on authentication status
   const navItems = [

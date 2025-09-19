@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LogOut, User, UserCircle } from "lucide-react";
+import Image from "next/image";
 
 interface TopbarProps {
   topbarMarginLeft: string;
@@ -47,10 +48,12 @@ export default function Topbar({ topbarMarginLeft }: TopbarProps) {
             className="flex items-center rounded-lg p-1 hover:bg-[var(--secondary)]  space-x-2 text-[var(--foreground)] hover:opacity-90 cursor-pointer transition-opacity duration-200"
           >
             {session.user?.image ? (
-              <img
+              <Image
                 src={session.user.image}
                 alt="User Avatar"
                 className="w-8 h-8 rounded-full object-cover"
+                width={32}
+                height={32}
               />
             ) : (
               <UserCircle className="w-8 h-8" />
