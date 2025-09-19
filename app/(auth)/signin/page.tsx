@@ -1,8 +1,8 @@
 "use client";
-
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 const SigninPage = () => {
   const { data: session } = useSession();
@@ -85,10 +85,10 @@ const SigninPage = () => {
           onClick={() => signIn("google")}
           className="w-full px-4 py-2 border flex items-center justify-center gap-2 border-slate-200 rounded-lg text-slate-700  hover:border-slate-400 hover:shadow transition duration-150"
         >
-          <img
-            className="w-6 h-6"
+          <Image
+            width={24}
+            height={24}
             src="https://www.svgrepo.com/show/475656/google-color.svg"
-            loading="lazy"
             alt="google logo"
           />
           <span>Login with Google</span>

@@ -9,10 +9,9 @@ interface CardProps {
   body: string;
   id: number;
   index: number;
-  userId: number;
 }
 
-export default function Card({ title, body, id, userId, index }: CardProps) {
+export default function Card({ title, body, id, index }: CardProps) {
   return (
     <motion.div
       className="bg-[var(--primary)] p-6 rounded-lg shadow-lg transition-all transform hover:scale-105 hover:shadow-xl inset-shadow-sm"
