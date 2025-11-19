@@ -3,28 +3,21 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req) {
+    const { pathname } = req.nextUrl;
+    const token = req.nextauth.token;
+
     // Redirect authenticated users from /signin to /dashboard
-    if (req.nextUrl.pathname === "/signin" && req.nextauth.token) {
+    if (pathname === "/signin" && token) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
-    // Protect dashboard and other protected routes
-    if (!req.nextauth.token && req.nextUrl.pathname.startsWith("/dashboard")) {
-      return NextResponse.redirect(new URL("/signin", req.url));
+    // Allow unauthenticated users to access /signin and /api/auth routes
+    if (pathname === "/signin" || pathname.startsWith("/api/auth")) {
+      return NextResponse.next();
     }
 
-    // Protect posts and other protected routes
-    if (!req.nextauth.token && req.nextUrl.pathname.startsWith("/posts")) {
-      return NextResponse.redirect(new URL("/signin", req.url));
-    }
-
-    // Protect users and other protected routes
-    if (!req.nextauth.token && req.nextUrl.pathname.startsWith("/users")) {
-      return NextResponse.redirect(new URL("/signin", req.url));
-    }
-
-    // Protect profile and other protected routes
-    if (!req.nextauth.token && req.nextUrl.pathname.startsWith("/profile")) {
+    // Check if user is authenticated for all other routes
+    if (!token) {
       return NextResponse.redirect(new URL("/signin", req.url));
     }
 
@@ -33,15 +26,14 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token, req }) => {
-        // Allow access to /signin if not authenticated
-        if (req.nextUrl.pathname === "/signin") {
+        const { pathname } = req.nextUrl;
+
+        // Allow access to signin page and auth API routes
+        if (pathname === "/signin" || pathname.startsWith("/api/auth")) {
           return true;
         }
-        // Allow access to API routes for authentication
-        if (req.nextUrl.pathname.startsWith("/api/auth")) {
-          return true;
-        }
-        // All other routes require authentication
+
+        // Require authentication for all other routes
         return !!token;
       },
     },
@@ -52,5 +44,14 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/posts/:path*", "/users/:path*", "/profile/:path*", "/signin"],
+  matcher: [
+    /*
+     * Match all request paths except for the following:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * *.svg, *.png, etc. (static assets)
+     */
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.).*)",
+  ],
 };
